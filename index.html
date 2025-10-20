@@ -116,6 +116,7 @@
     </div>
   </section>
 
+    <section>
     <div class="book-container" id="book">
       <div class="page" style="z-index:10;"><img src="slide1.jpg" alt="Slide 1"></div>
       <div class="page" style="z-index:9;"><img src="slide2.jpg" alt="Slide 2"></div>
@@ -128,22 +129,21 @@
       <div class="page" style="z-index:2;"><img src="slide9.jpg" alt="Slide 9"></div>
       <div class="page" style="z-index:1;"><img src="slide10.jpg" alt="Slide 10"></div>
     </div>
+    </section>
 
-    
-
-  <section class="contact-info" style="text-align:center; margin-top:40px;">
+  <!-- Contact info (below slides) -->
+  <section>
+  <div class="contact-info" style="text-align:center; margin-top:1400px; position: relative">
     <h2>Contact Us</h2>
     <p>Email: info@asiaest.com</p>
     <p>Phone: +966 548782532</p>
     <p>Address: King Faisal Ibn Abdulaziz Street, Al-Jubail 31951, Kingdom of Saudi Arabia</p>
-  </section>
-
-  <footer style="background-color:#153c7a; color:white; text-align:center; padding:20px 10px;">
-    <p>&copy; 2025 ASIA SOLUTIONS TRADING EST. All rights reserved.</p>
-  </footer>
+  </div>
+</section>
 
   <!-- Page flip sound -->
   <audio id="flipSound" src="page-flip.mp3" preload="auto"></audio>
+    
 
   <script>
     const pages = document.querySelectorAll(".page");
@@ -239,5 +239,10 @@
 
     showPage(current);
   </script>
+
+  <footer style="background-color:#153c7a; color:white; text-align:center; padding:20px 10px; position: relative">
+    <p>&copy; 2025 ASIA SOLUTIONS TRADING EST. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
