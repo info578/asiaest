@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASIA SOLUTIONS TRADING EST. 2025 </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+      color: #1f2d5a;
+    }
+    header {
+      text-align: center;
+      background-color: #e6edf7;
+      padding: 20px 0;
+    }
+    header img {
+      width: 200px;
+    }
+    h1 {
+      margin: 10px 0 5px;
+      font-size: 24px;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #153c7a;
+    }
+    .book-container {
+      perspective: 2000px;
+      width: 900px;
+      margin: 40px auto;
+      position: relative;
+      cursor: pointer;
+    }
+    .page {
+      width: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 1s ease, box-shadow 1s ease;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 8px;
+    }
+    .page img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      backface-visibility: hidden;
+    }
+
+    /* Paginator styles */
+    .paginator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      user-select: none;
+    }
+    .paginator .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d0d6e6;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      outline: none;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .paginator .dot:hover {
+      transform: scale(1.15);
+    }
+    .paginator .dot.active {
+      background: #153c7a;
+      box-shadow: 0 0 6px rgba(21,60,122,0.6);
+    }
+
+    /* Navigation buttons */
+    .nav-btn {
+      background: #153c7a;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin: 0 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .nav-btn:hover { opacity: 0.92; }
+
+    @media (max-width: 940px) {
+      .book-container { width: 100%; padding: 0 16px; box-sizing: border-box; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="LOGO NEW new.png" alt="Asia Solutions Trading Est. Logo">
+    <h1>ASIA SOLUTIONS TRADING EST.</h1>
+    <p>Reliable Industrial Material Supplier</p>
+    <p>Click left and right side of the page or arrow keys to navigate</p>
+  </header>
+
+  <section>
+    <h2>Company Profile</h2>
+
+    <!-- Paginator will be injected here by script -->
+    <div id="paginator-wrapper" style="text-align:center; height:40px;"></div>
+    <!-- Navigation buttons for accessibility / explicit controls -->
+    <div class="nav-buttons" style="text-align:center; margin-top:12px;">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous page">Previous</button>
+      <button class="nav-btn" id="nextBtn" aria-label="Next page">Next</button>
+    </div>
+  </section>
+
+    <div class="book-container" id="book">
+      <div class="page" style="z-index:10;"><img src="slide1.jpg" alt="Slide 1"></div>
+      <div class="page" style="z-index:9;"><img src="slide2.jpg" alt="Slide 2"></div>
+      <div class="page" style="z-index:8;"><img src="slide3.jpg" alt="Slide 3"></div>
+      <div class="page" style="z-index:7;"><img src="slide4.jpg" alt="Slide 4"></div>
+      <div class="page" style="z-index:6;"><img src="slide5.jpg" alt="Slide 5"></div>
+      <div class="page" style="z-index:5;"><img src="slide6.jpg" alt="Slide 6"></div>
+      <div class="page" style="z-index:4;"><img src="slide7.jpg" alt="Slide 7"></div>
+      <div class="page" style="z-index:3;"><img src="slide8.jpg" alt="Slide 8"></div>
+      <div class="page" style="z-index:2;"><img src="slide9.jpg" alt="Slide 9"></div>
+      <div class="page" style="z-index:1;"><img src="slide10.jpg" alt="Slide 10"></div>
+    </div>
+
+    
+
+  <section class="contact-info" style="text-align:center; margin-top:40px;">
+    <h2>Contact Us</h2>
+    <p>Email: info@asiaest.com</p>
+    <p>Phone: +966 548782532</p>
+    <p>Address: King Faisal Ibn Abdulaziz Street, Al-Jubail 31951, Kingdom of Saudi Arabia</p>
+  </section>
+
+  <footer style="background-color:#153c7a; color:white; text-align:center; padding:20px 10px;">
+    <p>&copy; 2025 ASIA SOLUTIONS TRADING EST. All rights reserved.</p>
+  </footer>
+
+  <!-- Page flip sound -->
+  <audio id="flipSound" src="page-flip.mp3" preload="auto"></audio>
+
+  <script>
+    const pages = document.querySelectorAll(".page");
+    const flipSound = document.getElementById("flipSound");
+    let current = 0;
+
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        if(i < index) {
+          page.style.transform = "rotateY(-180deg)";
+          page.style.boxShadow = "inset -10px 0 20px rgba(0,0,0,0.2)";
+        } else {
+          page.style.transform = "rotateY(0deg)";
+          page.style.boxShadow = "0 0 15px rgba(0,0,0,0.2)";
+        }
+      });
+
+      // Update paginator active dot
+      const dots = document.querySelectorAll(".paginator .dot");
+      if (dots.length) {
+        dots.forEach((d, i) => d.classList.toggle("active", i === index));
+      }
+    }
+
+    function nextPage() {
+      if(current < pages.length) {
+        current++;
+        showPage(current);
+        playFlip();
+      }
+    }
+
+    function prevPage() {
+      if(current > 0) {
+        current--;
+        showPage(current);
+        playFlip();
+      }
+    }
+
+    function playFlip() {
+      if(!flipSound) return;
+      flipSound.currentTime = 0;
+      flipSound.play().catch(()=>{ /* ignore autoplay block */ });
+    }
+
+    // Flip page by clicking left/right side
+    const book = document.getElementById("book");
+    book.addEventListener("click", (e) => {
+      const rect = book.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if(clickX < rect.width / 2) {
+        prevPage();
+      } else {
+        nextPage();
+      }
+    });
+
+    // Inject paginator (one dot per possible state: 0..pages.length)
+    (function createPaginator() {
+      const wrapper = document.getElementById('paginator-wrapper');
+      const paginator = document.createElement('div');
+      paginator.className = 'paginator';
+      wrapper.appendChild(paginator);
+
+      const count = pages.length + 1; // states from 0 (all closed) to pages.length (all opened)
+      for (let i = 0; i < count; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'dot';
+        btn.title = `Page ${i}`;
+        btn.dataset.index = i;
+        btn.addEventListener('click', (ev) => {
+          const idx = parseInt(ev.currentTarget.dataset.index, 10);
+          current = idx;
+          showPage(current);
+          playFlip();
+        });
+        paginator.appendChild(btn);
+      }
+    })();
+
+    // Keyboard navigation: left/right arrows
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextPage();
+      if (e.key === 'ArrowLeft') prevPage();
+    });
+
+    // Wire up explicit nav buttons
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    if (prevBtn) prevBtn.addEventListener('click', () => prevPage());
+    if (nextBtn) nextBtn.addEventListener('click', () => nextPage());
+
+    showPage(current);
+  </script>
+</body>
+</html>
